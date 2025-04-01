@@ -1,9 +1,9 @@
 <?php
 
-namespace TomatoPHP\FilamentMediaManager;
+namespace Tobil476\FilamentMediaManager;
 
 use Illuminate\Support\ServiceProvider;
-use TomatoPHP\FilamentMediaManager\Services\FilamentMediaManagerServices;
+use Tobil476\FilamentMediaManager\Services\FilamentMediaManagerServices;
 
 
 class FilamentMediaManagerServiceProvider extends ServiceProvider
@@ -12,7 +12,7 @@ class FilamentMediaManagerServiceProvider extends ServiceProvider
     {
         //Register generate command
         $this->commands([
-           \TomatoPHP\FilamentMediaManager\Console\FilamentMediaManagerInstall::class,
+           \Tobil476\FilamentMediaManager\Console\FilamentMediaManagerInstall::class,
         ]);
 
         //Register Config file

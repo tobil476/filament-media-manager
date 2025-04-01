@@ -1,6 +1,6 @@
 <?php
 
-namespace TomatoPHP\FilamentMediaManager\Resources\MediaResource\Pages;
+namespace Tobil476\FilamentMediaManager\Resources\MediaResource\Pages;
 
 use App\Models\User;
 use Filament\Forms\Components\FileUpload;
@@ -14,14 +14,14 @@ use Filament\Resources\Pages\ManageRecords;
 use Illuminate\Contracts\Support\Htmlable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
-use TomatoPHP\FilamentIcons\Components\IconPicker;
-use TomatoPHP\FilamentMediaManager\Models\Folder;
-use TomatoPHP\FilamentMediaManager\Models\Media;
-use TomatoPHP\FilamentMediaManager\Resources\Actions\CreateMediaAction;
-use TomatoPHP\FilamentMediaManager\Resources\Actions\CreateSubFolderAction;
-use TomatoPHP\FilamentMediaManager\Resources\Actions\DeleteFolderAction;
-use TomatoPHP\FilamentMediaManager\Resources\Actions\EditCurrentFolderAction;
-use TomatoPHP\FilamentMediaManager\Resources\MediaResource;
+use Tobil476\FilamentIcons\Components\IconPicker;
+use Tobil476\FilamentMediaManager\Models\Folder;
+use Tobil476\FilamentMediaManager\Models\Media;
+use Tobil476\FilamentMediaManager\Resources\Actions\CreateMediaAction;
+use Tobil476\FilamentMediaManager\Resources\Actions\CreateSubFolderAction;
+use Tobil476\FilamentMediaManager\Resources\Actions\DeleteFolderAction;
+use Tobil476\FilamentMediaManager\Resources\Actions\EditCurrentFolderAction;
+use Tobil476\FilamentMediaManager\Resources\MediaResource;
 use Filament\Actions;
 use Filament\Resources\Pages\ListRecords;
 

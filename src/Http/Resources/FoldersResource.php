@@ -1,6 +1,6 @@
 <?php
 
-namespace TomatoPHP\FilamentMediaManager\Http\Resources;
+namespace Tobil476\FilamentMediaManager\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 

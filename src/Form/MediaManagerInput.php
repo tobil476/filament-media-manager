@@ -1,6 +1,6 @@
 <?php
 
-namespace TomatoPHP\FilamentMediaManager\Form;
+namespace Tobil476\FilamentMediaManager\Form;
 
 use Filament\Actions\ActionGroup;
 use Filament\Forms\Components\Actions\Action;
@@ -28,9 +28,9 @@ use Livewire\Features\SupportFileUploads\TemporaryUploadedFile;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\MediaCollections\FileAdder;
 use Spatie\MediaLibrary\MediaCollections\MediaCollection;
-use TomatoPHP\FilamentMediaManager\Models\Folder;
+use Tobil476\FilamentMediaManager\Models\Folder;
 use Closure;
-use TomatoPHP\FilamentMediaManager\Models\Media;
+use Tobil476\FilamentMediaManager\Models\Media;
 use Spatie\MediaLibrary\MediaCollections\Models\Media as SpatieMedia;
 
 class MediaManagerInput extends Repeater

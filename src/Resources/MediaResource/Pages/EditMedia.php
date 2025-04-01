@@ -1,8 +1,8 @@
 <?php
 
-namespace TomatoPHP\FilamentMediaManager\Resources\MediaResource\Pages;
+namespace Tobil476\FilamentMediaManager\Resources\MediaResource\Pages;
 
-use TomatoPHP\FilamentMediaManager\Resources\MediaResource;
+use Tobil476\FilamentMediaManager\Resources\MediaResource;
 use Filament\Actions;
 use Filament\Resources\Pages\EditRecord;
 

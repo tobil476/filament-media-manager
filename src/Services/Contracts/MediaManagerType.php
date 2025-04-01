@@ -1,6 +1,6 @@
 <?php
 
-namespace TomatoPHP\FilamentMediaManager\Services\Contracts;
+namespace Tobil476\FilamentMediaManager\Services\Contracts;
 
 class MediaManagerType
 {

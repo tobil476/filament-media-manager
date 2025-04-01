@@ -1,10 +1,10 @@
 <?php
 
-namespace TomatoPHP\FilamentMediaManager\Http\Resources;
+namespace Tobil476\FilamentMediaManager\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
-use TomatoPHP\FilamentMediaManager\Models\Folder;
+use Tobil476\FilamentMediaManager\Models\Folder;
 
 class FolderResource extends JsonResource
 {
@@ -16,7 +16,7 @@ class FolderResource extends JsonResource
 
         $subFolders = Folder::query()
             ->where('model_id', $this->id)
-            ->where('model_type', "TomatoPHP\FilamentMediaManager\Models\Folder");
+            ->where('model_type', "Tobil476\FilamentMediaManager\Models\Folder");
 
         return [
             'id' => $this->id,

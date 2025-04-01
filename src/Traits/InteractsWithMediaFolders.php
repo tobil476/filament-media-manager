@@ -1,8 +1,8 @@
 <?php
 
-namespace TomatoPHP\FilamentMediaManager\Traits;
+namespace Tobil476\FilamentMediaManager\Traits;
 
-use TomatoPHP\FilamentMediaManager\Models\Folder;
+use Tobil476\FilamentMediaManager\Models\Folder;
 
 trait InteractsWithMediaFolders
 {

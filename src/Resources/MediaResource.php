@@ -1,12 +1,12 @@
 <?php
 
-namespace TomatoPHP\FilamentMediaManager\Resources;
+namespace Tobil476\FilamentMediaManager\Resources;
 
 use Filament\Facades\Filament;
-use TomatoPHP\FilamentMediaManager\Models\Folder;
-use TomatoPHP\FilamentMediaManager\Resources\MediaResource\Pages;
-use TomatoPHP\FilamentMediaManager\Resources\MediaResource\RelationManagers;
-use TomatoPHP\FilamentMediaManager\Models\Media;
+use Tobil476\FilamentMediaManager\Models\Folder;
+use Tobil476\FilamentMediaManager\Resources\MediaResource\Pages;
+use Tobil476\FilamentMediaManager\Resources\MediaResource\RelationManagers;
+use Tobil476\FilamentMediaManager\Models\Media;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;

@@ -1,10 +1,10 @@
 <?php
 
-namespace TomatoPHP\FilamentMediaManager\Resources\Actions;
+namespace Tobil476\FilamentMediaManager\Resources\Actions;
 
 use Illuminate\Support\Str;
-use TomatoPHP\FilamentIcons\Components\IconPicker;
-use TomatoPHP\FilamentMediaManager\Models\Folder;
+use Tobil476\FilamentIcons\Components\IconPicker;
+use Tobil476\FilamentMediaManager\Models\Folder;
 use Filament\Actions;
 use Filament\Forms;
 use Filament\Notifications\Notification;

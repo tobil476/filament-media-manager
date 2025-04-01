@@ -1,14 +1,14 @@
 <?php
 
-namespace TomatoPHP\FilamentMediaManager;
+namespace Tobil476\FilamentMediaManager;
 
 use Filament\Contracts\Plugin;
 use Filament\Panel;
 use Nwidart\Modules\Module;
-use TomatoPHP\FilamentArtisan\Pages\Artisan;
-use TomatoPHP\FilamentMediaManager\Pages\FoldersPage;
-use TomatoPHP\FilamentMediaManager\Resources\FolderResource;
-use TomatoPHP\FilamentMediaManager\Resources\MediaResource;
+use Tobil476\FilamentArtisan\Pages\Artisan;
+use Tobil476\FilamentMediaManager\Pages\FoldersPage;
+use Tobil476\FilamentMediaManager\Resources\FolderResource;
+use Tobil476\FilamentMediaManager\Resources\MediaResource;
 
 
 class FilamentMediaManagerPlugin implements Plugin

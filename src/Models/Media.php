@@ -1,6 +1,6 @@
 <?php
 
-namespace TomatoPHP\FilamentMediaManager\Models;
+namespace Tobil476\FilamentMediaManager\Models;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Relations\MorphMany;

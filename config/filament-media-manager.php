@@ -4,8 +4,8 @@ return [
     "disk" => env('MEDIA_MANAGER_DISK', 'public'),
 
     "model" => [
-        "folder" => \TomatoPHP\FilamentMediaManager\Models\Folder::class,
-        "media" => \TomatoPHP\FilamentMediaManager\Models\Media::class,
+        "folder" => \Tobil476\FilamentMediaManager\Models\Folder::class,
+        "media" => \Tobil476\FilamentMediaManager\Models\Media::class,
     ],
 
     "api" => [
@@ -16,9 +16,9 @@ return [
         ],
         "prefix" => "api/media-manager",
         "resources" => [
-            "folders" => \TomatoPHP\FilamentMediaManager\Http\Resources\FoldersResource::class,
-            "folder" => \TomatoPHP\FilamentMediaManager\Http\Resources\FolderResource::class,
-            "media" => \TomatoPHP\FilamentMediaManager\Http\Resources\MediaResource::class
+            "folders" => \Tobil476\FilamentMediaManager\Http\Resources\FoldersResource::class,
+            "folder" => \Tobil476\FilamentMediaManager\Http\Resources\FolderResource::class,
+            "media" => \Tobil476\FilamentMediaManager\Http\Resources\MediaResource::class
         ]
     ],
 

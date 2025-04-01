@@ -1,9 +1,9 @@
 <?php
 
-namespace TomatoPHP\FilamentMediaManager\Console;
+namespace Tobil476\FilamentMediaManager\Console;
 
 use Illuminate\Console\Command;
-use TomatoPHP\ConsoleHelpers\Traits\RunCommand;
+use Tobil476\ConsoleHelpers\Traits\RunCommand;
 
 class FilamentMediaManagerInstall extends Command
 {

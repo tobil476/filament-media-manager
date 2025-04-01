@@ -1,6 +1,6 @@
 <?php
 
-namespace TomatoPHP\FilamentMediaManager\Resources\Actions;
+namespace Tobil476\FilamentMediaManager\Resources\Actions;
 use Filament\Actions;
 use Filament\Forms;
 use Filament\Notifications\Notification;

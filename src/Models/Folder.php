@@ -1,6 +1,6 @@
 <?php
 
-namespace TomatoPHP\FilamentMediaManager\Models;
+namespace Tobil476\FilamentMediaManager\Models;
 
 use App\Models\User;
 use Illuminate\Database\Eloquent\Model;

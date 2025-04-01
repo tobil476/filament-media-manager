@@ -1,11 +1,11 @@
 <?php
 
-namespace TomatoPHP\FilamentMediaManager\Services;
+namespace Tobil476\FilamentMediaManager\Services;
 
 use Filament\Support\Assets\Css;
 use Filament\Support\Assets\Js;
 use Filament\Support\Facades\FilamentAsset;
-use TomatoPHP\FilamentMediaManager\Services\Contracts\MediaManagerType;
+use Tobil476\FilamentMediaManager\Services\Contracts\MediaManagerType;
 
 class FilamentMediaManagerServices
 {

@@ -14,7 +14,7 @@
     "license": "MIT",
     "autoload": {
         "psr-4": {
-            "TomatoPHP\\FilamentMediaManager\\": "src/"
+            "Tobil476\\FilamentMediaManager\\": "src/"
         }
     },
     "autoload-dev": {
@@ -25,7 +25,7 @@
     "extra": {
         "laravel": {
             "providers": [
-                "TomatoPHP\\FilamentMediaManager\\FilamentMediaManagerServiceProvider"
+                "Tobil476\\FilamentMediaManager\\FilamentMediaManagerServiceProvider"
             ]
         }
     },

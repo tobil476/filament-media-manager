@@ -1,12 +1,12 @@
 <?php
 
-namespace TomatoPHP\FilamentMediaManager\Resources\Actions;
+namespace Tobil476\FilamentMediaManager\Resources\Actions;
 use App\Models\User;
 use Filament\Actions;
 use Filament\Forms;
 use Filament\Forms\Components\Grid;
 use Filament\Notifications\Notification;
-use TomatoPHP\FilamentIcons\Components\IconPicker;
+use Tobil476\FilamentIcons\Components\IconPicker;
 
 class EditCurrentFolderAction
 {

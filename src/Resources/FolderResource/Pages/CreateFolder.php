@@ -1,8 +1,8 @@
 <?php
 
-namespace TomatoPHP\FilamentMediaManager\Resources\FolderResource\Pages;
+namespace Tobil476\FilamentMediaManager\Resources\FolderResource\Pages;
 
-use TomatoPHP\FilamentMediaManager\Resources\FolderResource;
+use Tobil476\FilamentMediaManager\Resources\FolderResource;
 use Filament\Actions;
 use Filament\Resources\Pages\CreateRecord;
 

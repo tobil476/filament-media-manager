@@ -1,6 +1,6 @@
 <?php
 
-namespace TomatoPHP\FilamentMediaManager\Facade;
+namespace Tobil476\FilamentMediaManager\Facade;
 
 use Illuminate\Support\Facades\Facade;
 

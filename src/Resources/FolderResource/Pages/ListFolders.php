@@ -1,14 +1,14 @@
 <?php
 
-namespace TomatoPHP\FilamentMediaManager\Resources\FolderResource\Pages;
+namespace Tobil476\FilamentMediaManager\Resources\FolderResource\Pages;
 
 use Filament\Forms\Components\TextInput;
 use Filament\Notifications\Notification;
 use Filament\Resources\Pages\ManageRecords;
 use Illuminate\Validation\ValidationException;
-use TomatoPHP\FilamentMediaManager\Models\Folder;
-use TomatoPHP\FilamentMediaManager\Models\Media;
-use TomatoPHP\FilamentMediaManager\Resources\FolderResource;
+use Tobil476\FilamentMediaManager\Models\Folder;
+use Tobil476\FilamentMediaManager\Models\Media;
+use Tobil476\FilamentMediaManager\Resources\FolderResource;
 use Filament\Actions;
 use Filament\Resources\Pages\ListRecords;
 

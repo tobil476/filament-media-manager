@@ -1,14 +1,14 @@
 <?php
 
-namespace TomatoPHP\FilamentMediaManager\Http\Controllers;
+namespace Tobil476\FilamentMediaManager\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
-use TomatoPHP\FilamentMediaManager\Http\Resources\FolderResource;
-use TomatoPHP\FilamentMediaManager\Http\Resources\FoldersResource;
-use TomatoPHP\FilamentMediaManager\Http\Resources\MediaResource;
-use TomatoPHP\FilamentMediaManager\Models\Folder;
+use Tobil476\FilamentMediaManager\Http\Resources\FolderResource;
+use Tobil476\FilamentMediaManager\Http\Resources\FoldersResource;
+use Tobil476\FilamentMediaManager\Http\Resources\MediaResource;
+use Tobil476\FilamentMediaManager\Models\Folder;
 
 class FolderController extends Controller
 {

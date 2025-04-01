@@ -1,12 +1,12 @@
 <?php
 
-namespace TomatoPHP\FilamentMediaManager\Resources;
+namespace Tobil476\FilamentMediaManager\Resources;
 
 use Illuminate\Support\Str;
-use TomatoPHP\FilamentIcons\Components\IconPicker;
-use TomatoPHP\FilamentMediaManager\Resources\FolderResource\Pages;
-use TomatoPHP\FilamentMediaManager\Resources\FolderResource\RelationManagers;
-use TomatoPHP\FilamentMediaManager\Models\Folder;
+use Tobil476\FilamentIcons\Components\IconPicker;
+use Tobil476\FilamentMediaManager\Resources\FolderResource\Pages;
+use Tobil476\FilamentMediaManager\Resources\FolderResource\RelationManagers;
+use Tobil476\FilamentMediaManager\Models\Folder;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;

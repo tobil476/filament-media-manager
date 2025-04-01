@@ -177,7 +177,7 @@ class MediaManagerInput extends Repeater
                 $item['file'] = $state;
 
                 $getState[] = array_merge([
-                    "file" => array_keys($state)[0]
+                    "file" => array_keys($state)
                 ], collect($item)->filter(fn ($value, $key) => $key !== 'file')->toArray());
 
                 $counter++;
@@ -196,7 +196,14 @@ class MediaManagerInput extends Repeater
                 ];
                 $counter=0;
                 foreach ($items as $item){
-                    $media = Media::where('uuid', array_keys($item['file'])[0])->first();
+                    foreach (Arr::wrap($item['file']) as $uuid) {
+                        $media = Media::where('uuid', $uuid)->first();
+                        if ($media) {
+                            $media->update([
+                                'order_column' => $counter,
+                            ]);
+                        }
+                    }
                     if($media){
                         $media->update([
                             'order_column'=> $counter
@@ -216,7 +223,15 @@ class MediaManagerInput extends Repeater
                 ->requiresConfirmation()
                 ->action(function (array $arguments, Repeater $component){
                 $items = $component->getState();
-                $media = Media::where('uuid', $items[$arguments['item']])->first();
+                //$media = Media::where('uuid', $items[$arguments['item']])->first();
+                foreach (Arr::wrap($item['file']) as $uuid) {
+                    $media = Media::where('uuid', $uuid)->first();
+                    if ($media) {
+                        $media->update([
+                            'order_column' => $counter,
+                        ]);
+                    }
+                }
                 if($media){
                     $media->delete();
                 }

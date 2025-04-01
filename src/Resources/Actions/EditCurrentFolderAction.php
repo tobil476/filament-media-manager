@@ -6,7 +6,7 @@ use Filament\Actions;
 use Filament\Forms;
 use Filament\Forms\Components\Grid;
 use Filament\Notifications\Notification;
-use Tobil476\FilamentIcons\Components\IconPicker;
+use TomatoPHP\FilamentIcons\Components\IconPicker;
 
 class EditCurrentFolderAction
 {

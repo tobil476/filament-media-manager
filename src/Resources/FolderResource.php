@@ -3,7 +3,7 @@
 namespace Tobil476\FilamentMediaManager\Resources;
 
 use Illuminate\Support\Str;
-use Tobil476\FilamentIcons\Components\IconPicker;
+use TomatoPHP\FilamentIcons\Components\IconPicker;
 use Tobil476\FilamentMediaManager\Resources\FolderResource\Pages;
 use Tobil476\FilamentMediaManager\Resources\FolderResource\RelationManagers;
 use Tobil476\FilamentMediaManager\Models\Folder;

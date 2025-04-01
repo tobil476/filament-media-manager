@@ -14,7 +14,7 @@ use Filament\Resources\Pages\ManageRecords;
 use Illuminate\Contracts\Support\Htmlable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
-use Tobil476\FilamentIcons\Components\IconPicker;
+use TomatoPHP\FilamentIcons\Components\IconPicker;
 use Tobil476\FilamentMediaManager\Models\Folder;
 use Tobil476\FilamentMediaManager\Models\Media;
 use Tobil476\FilamentMediaManager\Resources\Actions\CreateMediaAction;

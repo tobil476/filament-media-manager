@@ -207,9 +207,11 @@
 
                     @if(filament('filament-media-manager')->allowUserAccess && (!empty($currentFolder->user_id)))
                         @if($currentFolder->user_id === auth()->user()->id && $currentFolder->user_type === get_class(auth()->user()))
+                            @if(auth()->user()?->role === 'admin')
                             <x-slot name="footer">
                                 {{ ($this->deleteMedia)(['record' => $item]) }}
                             </x-slot>
+                        @endif
                         @endif
                     @else
                         <x-slot name="footer">

@@ -46,6 +46,9 @@ class MediaManagerInput extends Repeater
         parent::setUp();
 
         $this->saveRelationshipsUsing(static function (Repeater $component, HasMedia $record): void {
+            if (auth()->user()?->role !== 'admin') {
+                return; // Non fare nulla se non è admin
+            }
             $mediaComponent = $component->childComponents[0]??null;
             $setState = $component->getState();
             $collectMediaIds = [];
@@ -189,7 +192,9 @@ class MediaManagerInput extends Repeater
         });
 
         $this->reorderAction(static function (Action $action): void {
-            $action->action(function (array $arguments, Repeater $component): void {
+            $action
+            ->hidden(fn () => auth()->user()?->role !== 'admin')
+            ->action(function (array $arguments, Repeater $component): void {
                 $items = [
                     ...array_flip($arguments['items']),
                     ...$component->getState(),
@@ -221,27 +226,28 @@ class MediaManagerInput extends Repeater
         $this->deleteAction(static function (Action $action): void {
             $action
                 ->requiresConfirmation()
+                ->hidden(fn () => auth()->user()?->role !== 'admin')
                 ->action(function (array $arguments, Repeater $component){
-                $items = $component->getState();
-                //$media = Media::where('uuid', $items[$arguments['item']])->first();
-                foreach (Arr::wrap($item['file']) as $uuid) {
-                    $media = Media::where('uuid', $uuid)->first();
-                    if ($media) {
-                        $media->update([
-                            'order_column' => $counter,
-                        ]);
+                    $items = $component->getState();
+                    $item = $items[$arguments['item']] ?? null;
+        
+                    if (! $item) {
+                        return;
                     }
-                }
-                if($media){
-                    $media->delete();
-                }
-
-                unset($items[$arguments['item']]);
-
-                $component->state($items);
-
-                $component->callAfterStateUpdated();
-            });
+        
+                    foreach (Arr::wrap($item['file']) as $uuid) {
+                        $media = Media::where('uuid', $uuid)->first();
+                        if ($media) {
+                            $media->delete();
+                        }
+                    }
+        
+                    unset($items[$arguments['item']]);
+        
+                    $component->state($items);
+        
+                    $component->callAfterStateUpdated();
+                });
         });
 
 
@@ -293,6 +299,7 @@ class MediaManagerInput extends Repeater
                 ->required()
                 ->multiple() // accept multiple files by default
                 ->storeFiles(false)
+                ->disabled(fn () => auth()->user()?->role !== 'admin')
                 ->collection($this->name),
         ],$components));
 

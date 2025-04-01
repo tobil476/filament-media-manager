@@ -11,9 +11,6 @@ class FilamentMediaManagerServiceProvider extends ServiceProvider
     public function register(): void
     {
         //Register generate command
-        $this->commands([
-           \Tobil476\FilamentMediaManager\Console\FilamentMediaManagerInstall::class,
-        ]);
 
         //Register Config file
         $this->mergeConfigFrom(__DIR__.'/../config/filament-media-manager.php', 'filament-media-manager');

@@ -276,6 +276,7 @@ class MediaManagerInput extends Repeater
             FileInput::make('file')
                 ->disk($this->diskName)
                 ->required()
+                ->multiple() // accept multiple files by default
                 ->storeFiles(false)
                 ->collection($this->name),
         ],$components));
@@ -301,7 +302,8 @@ class MediaManagerInput extends Repeater
             ->first()
             ?->diskName;
 
-        return $diskNameFromRegisteredConversions ?? config('filament.default_filesystem_disk');
+        // support for other filesystem disks defined in filesystems config and in env file. changeable in plugin config file
+        return $diskNameFromRegisteredConversions ?? config('filament-media-manager.disk', 'public');
     }
 
     public function disk(string | Closure | null $name): static

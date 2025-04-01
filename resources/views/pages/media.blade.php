@@ -24,9 +24,9 @@
                     <div class="flex flex-col justify-start gap-4 border dark:border-gray-700 rounded-lg shadow-sm p-2 w-full h-full">
                         <div class="flex flex-col items-center justify-center  p-4 h-full">
                             @if(str($item->mime_type)->contains('image'))
-                                <img src="{{ $item->getUrl() }}" />
+                                <img src="{{ route('secure.media', $item) }}" />
                             @elseif(str($item->mime_type)->contains('video'))
-                                <video src="{{ $item->getUrl() }}"></video>
+                                <video src="{{ route('secure.media', $item) }}"></video>
                             @elseif(str($item->mime_type)->contains('audio'))
                                 <x-icon name="heroicon-o-musical-note" class="w-32 h-32" />
                             @else
@@ -92,21 +92,21 @@
                     <div class="flex flex-col justify-start w-full h-full">
 
                         @if(str($item->mime_type)->contains('image'))
-                            <a href="{{ $item->getUrl() }}" target="_blank" class="flex flex-col items-center justify-center  p-4 h-full border dark:border-gray-700 rounded-lg">
-                                <img src="{{ $item->getUrl() }}" />
+                            <a href="{{ route('secure.media', $item) }}" target="_blank" class="flex flex-col items-center justify-center  p-4 h-full border dark:border-gray-700 rounded-lg">
+                                <img src="{{ route('secure.media', $item) }}" />
                             </a>
 
                         @elseif(str($item->mime_type)->contains('video'))
-                            <a href="{{ $item->getUrl() }}" target="_blank" class="flex flex-col items-center justify-center  p-4 h-full border dark:border-gray-700 rounded-lg">
+                            <a href="{{ route('secure.media', $item) }}" target="_blank" class="flex flex-col items-center justify-center  p-4 h-full border dark:border-gray-700 rounded-lg">
                                 <video class="w-full h-full" controls>
-                                    <source src="{{ $item->getUrl() }}" type="{{ $item->mime_type }}">
+                                    <source src="{{ route('secure.media', $item) }}" type="{{ $item->mime_type }}">
                                 </video>
                             </a>
 
                         @elseif(str($item->mime_type)->contains('audio'))
-                            <a href="{{ $item->getUrl() }}" target="_blank" class="flex flex-col items-center justify-center  p-4 h-full border dark:border-gray-700 rounded-lg">
+                            <a href="{{ route('secure.media', $item) }}" target="_blank" class="flex flex-col items-center justify-center  p-4 h-full border dark:border-gray-700 rounded-lg">
                                 <video class="w-full h-full" controls>
-                                    <source src="{{ $item->getUrl() }}" type="{{ $item->mime_type }}">
+                                    <source src="{{ route('secure.media', $item) }}" type="{{ $item->mime_type }}">
                                 </video>
                             </a>
                         @else
@@ -123,7 +123,7 @@
                                 @include($hasPreview, ['media' => $item])
 
                             @else
-                                <a href="{{ $item->getUrl() }}" target="_blank" class="flex flex-col items-center justify-center  p-4 h-full border dark:border-gray-700 rounded-lg">
+                                <a href="{{ route('secure.media', $item) }}" target="_blank" class="flex flex-col items-center justify-center  p-4 h-full border dark:border-gray-700 rounded-lg">
                                     @if($type)
                                         <x-icon :name="$type->icon" class="w-32 h-32" />
                                     @else

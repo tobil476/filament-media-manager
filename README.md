@@ -1,200 +1,126 @@
-![Screenshot](https://raw.githubusercontent.com/tomatophp/filament-media-manager/master/arts/3x1io-tomato-media-manager.jpg)
+# Filament Media Manager (Enhanced Fork)
 
-# Filament media manager
+A powerful media manager for [FilamentPHP](https://filamentphp.com), built on top of [Spatie Media Library](https://spatie.be/docs/laravel-medialibrary/), enhanced to support:
 
-[![Latest Stable Version](https://poser.pugx.org/tomatophp/filament-media-manager/version.svg)](https://packagist.org/packages/tomatophp/filament-media-manager)
-[![License](https://poser.pugx.org/tomatophp/filament-media-manager/license.svg)](https://packagist.org/packages/tomatophp/filament-media-manager)
-[![Downloads](https://poser.pugx.org/tomatophp/filament-media-manager/d/total.svg)](https://packagist.org/packages/tomatophp/filament-media-manager)
+- ✅ Multi-file upload  
+- ✅ Secure file access with custom route  
+- ✅ Use of `private` disk without publishing Spatie config  
+- ✅ Organization-based multi-tenancy support  
 
-Manage your media files using spatie media library with easy to use GUI for FilamentPHP
+> This is a fork of [tomatophp/filament-media-manager](https://github.com/tomatophp/filament-media-manager), extended with advanced features. Original credit goes to [TomatoPHP](https://github.com/tomatophp).
 
-## Installation
+---
+
+## 🚀 Installation
 
 ```bash
-composer require tomatophp/filament-media-manager
+composer require tobil476/filament-media-manager
 ```
 
-now you need to publish media migration 
+> Replace the original `tomatophp/filament-media-manager` if you were using it.
+
+---
+
+## 🛠️ Setup
+
+### 1. Publish Spatie migrations
 
 ```bash
 php artisan vendor:publish --provider="Spatie\MediaLibrary\MediaLibraryServiceProvider" --tag="medialibrary-migrations"
+php artisan migrate
 ```
 
-after install your package please run this command
+### 2. Publish the Filament Media Manager config
 
 ```bash
-php artisan filament-media-manager:install
+php artisan vendor:publish --tag="filament-media-manager-config"
 ```
 
-finally register the plugin on `/app/Providers/Filament/AdminPanelProvider.php`, if you like to use GUI and Folder Browser.
+This will create a file at `config/filament-media-manager.php`.
+
+### 3. Configure private disk (optional)
+
+In `config/filesystems.php`:
 
 ```php
-->plugin(\TomatoPHP\FilamentMediaManager\FilamentMediaManagerPlugin::make())
+'private' => [
+    'driver' => 'local',
+    'root' => storage_path('app/private'),
+    'visibility' => 'private',
+],
 ```
 
-## Features
-
-- Manage your media files using spatie media library
-- Create folders and subfolders
-- Set password for folders
-- Upload Files with Custom Fields using `->schema()`
-- Auto Create Folders for Model/Collection/Record
-- RTL/Mutli Language Support
-
-## Screenshots
-
-![Folders](https://raw.githubusercontent.com/tomatophp/filament-media-manager/master/arts/folders.png)
-![Folder Password](https://raw.githubusercontent.com/tomatophp/filament-media-manager/master/arts/folder-password.png)
-![Media](https://raw.githubusercontent.com/tomatophp/filament-media-manager/master/arts/media.png)
-![Media Inputs](https://raw.githubusercontent.com/tomatophp/filament-media-manager/master/arts/media-input.png)
-![Media Component](https://raw.githubusercontent.com/tomatophp/filament-media-manager/master/arts/media-component.png)
-
-
-## Usage
-
-you can use the media manager by add this code to your filament component
+In `config/filament-media-manager.php`, change:
 
 ```php
-use TomatoPHP\FilamentMediaManager\Form\MediaManagerInput;
-
-public function form(Form $form)
-{
-    return $form->schema([
-        MediaManagerInput::make('images')
-            ->disk('public')
-            ->schema([
-                Forms\Components\TextInput::make('title')
-                    ->required()
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('description')
-                    ->required()
-                    ->maxLength(255),
-            ]),
-    ]);
-}
-
+"disk" => env('MEDIA_MANAGER_DISK', 'private'), //default is public
 ```
+or create a variable directly in your .env file
 
-## Add Custom Preview to selected type on the media manager
+---
 
-you can add custom preview to selected type on the media manager by add this code to your provider
+## 🔐 Secure Access to Media Files
 
-```php
-use TomatoPHP\FilamentMediaManager\Facade\FilamentMediaManager;
-use TomatoPHP\FilamentMediaManager\Services\Contracts\MediaManagerType;
-
-
-public function boot() {
-     FilamentMediaManager::register([
-        MediaManagerType::make('.pdf')
-            ->icon('bxs-file-pdf')
-            ->preview('media-manager.pdf'),
-    ]);
-}
-```
-
-on your view file you can use it like this 
+In your `routes/web.php`:
 
 ```php
-<div class="m-4">
-    <canvas id="the-canvas"></canvas>
-</div>
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Response;
+use Illuminate\Support\Facades\Storage;
+use TomatoPHP\FilamentMediaManager\Models\Media;
+use TomatoPHP\FilamentMediaManager\Models\Folder;
 
-<script src="//mozilla.github.io/pdf.js/build/pdf.mjs" type="module"></script>
-
-<style type="text/css">
-    #the-canvas {
-        border: 1px solid black;
-        direction: ltr;
+Route::get('/secure-media/{media}', function (Media $media, Request $request) {
+    if (!auth()->check()) {
+        abort(403, 'Unauthorized');
     }
-</style>
-<script type="module">
-    // If absolute URL from the remote server is provided, configure the CORS
-    // header on that server.
-    var url = "{{ $url }}";
 
-    // Loaded via <script> tag, create shortcut to access PDF.js exports.
-    var { pdfjsLib } = globalThis;
+    $folder = $media->model_type === Folder::class
+        ? Folder::find($media->model_id)
+        : null;
 
-    // The workerSrc property shall be specified.
-    pdfjsLib.GlobalWorkerOptions.workerSrc = '//mozilla.github.io/pdf.js/build/pdf.worker.mjs';
+    $user = auth()->user();
 
-    // Asynchronous download of PDF
-    var loadingTask = pdfjsLib.getDocument(url);
-    loadingTask.promise.then(function(pdf) {
+    if ($user->role === 'admin') {
+        // Admin access
+    } elseif ($folder && !$folder->users->contains($user)) {
+        abort(403, 'Access denied');
+    }
 
-        // Fetch the first page
-        var pageNumber = 1;
-        pdf.getPage(pageNumber).then(function(page) {
-            var scale = 1;
-            var viewport = page.getViewport({scale: scale});
+    if (!Storage::disk($media->disk)->exists($media->getPathRelativeToRoot())) {
+        abort(404);
+    }
 
-            // Prepare canvas using PDF page dimensions
-            var canvas = document.getElementById('the-canvas');
-            var context = canvas.getContext('2d');
-            canvas.height = viewport.height;
-            canvas.width = viewport.width;
+    return Response::file(
+        $media->getPath(),
+        [
+            'Content-Type' => $media->mime_type,
+            'Content-Disposition' => 'inline; filename="' . $media->file_name . '"',
+        ]
+    );
+})->middleware('auth')->name('secure.media');
+```
+This route setup is custom for my laravel webapp since I'm using multi tenancy, I added a 'role' column in my user model, but you could adapt it to use it without it or with another model (like user model for user role and admin model for admin role)
 
-            // Render PDF page into canvas context
-            var renderContext = {
-                canvasContext: context,
-                viewport: viewport
-            };
-            var renderTask = page.render(renderContext);
-        });
-    }, function (reason) {
-        // PDF loading error
-        console.error(reason);
-    });
-</script>
+In your views (if you want to publish the views, but the feature is already added by default):
+
+```blade
+{{ route('secure.media', $media) }}
 ```
 
-you can attach global `js` or `css` file to the media manager by add this code to your provider
+---
+
+## 🏢 Multi-Tenant Support
+
+If using Filament's tenancy:
 
 ```php
-use TomatoPHP\FilamentMediaManager\Facade\FilamentMediaManager;
-use TomatoPHP\FilamentMediaManager\Services\Contracts\MediaManagerType;
-
-
-public function boot() {
-     FilamentMediaManager::register([
-        MediaManagerType::make('.pdf')
-            ->js('https://mozilla.github.io/pdf.js/build/pdf.mjs'),
-            ->css('https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.3.136/pdf_viewer.min.css'),
-            ->icon('bxs-file-pdf')
-            ->preview('media-manager.pdf'),
-    ]);
-}
+->tenant(\App\Models\Organization::class, slugAttribute: 'slug')
 ```
 
-please note that the `name ` of the component will be the same name of the collection.
-
-## Allow Sub Folders
-
-you can allow create and manage subfolders on your media manager on `/app/Providers/Filament/AdminPanelProvider.php`
+And in your `User` model:
 
 ```php
-->plugins([
-    \TomatoPHP\FilamentMediaManager\FilamentMediaManagerPlugin::make()
-        ->allowSubFolders()
-])
-```
-
-## Allow User Access
-
-now you can allow user to access selected folder and restract user to access each other folders if the folder is not public on `/app/Providers/Filament/AdminPanelProvider.php`
-
-```php
-->plugin(
-    \TomatoPHP\FilamentMediaManager\FilamentMediaManagerPlugin::make()
-        ->allowUserAccess()
-)
-```
-
-now on your user model you can use this trait to allow user to access selected folder
-
-```php
-
 use TomatoPHP\FilamentMediaManager\Traits\InteractsWithMediaFolders;
 
 class User extends Authenticatable
@@ -203,55 +129,39 @@ class User extends Authenticatable
 }
 ```
 
-**NOTE** don't forget to migrate after update the plugin
+---
 
-## Folders API
+## 🖼️ Uploading Multiple Files
 
-now you can access your media and folders using API you have 2 endpoints
+Multiple upload is enabled natively in this fork via `MediaManagerInput` and Blade customizations.
 
-- `/api/folders` to get all folders
-- `/api/folders/{id}` to get folder by id with sub folders and media files
+---
 
-to allow this feature you need to publish the config file by use this command
+## 📸 Screenshots
 
-```bash
-php artisan vendor:publish --tag="filament-media-manager-config"
-```
+| Folders | Folder Password | Media Grid |
+|--------|-----------------|------------|
+| ![Folders](https://raw.githubusercontent.com/tomatophp/filament-media-manager/master/arts/folders.png) | ![Password](https://raw.githubusercontent.com/tomatophp/filament-media-manager/master/arts/folder-password.png) | ![Media](https://raw.githubusercontent.com/tomatophp/filament-media-manager/master/arts/media.png) |
 
-then you can set `api.active` to `true` on the config file
+---
 
-```php
-'api' => [
-    "active" => true,
-],
-```
+## 📦 Additional Features
 
-## Publish Assets
+- ✅ Auto-folder creation per model or collection  
+- ✅ Folder sharing with multiple users  
+- ✅ File custom properties: title & description  
+- ✅ PDF preview & custom file types via JS  
 
-you can publish config file by use this command
+---
 
-```bash
-php artisan vendor:publish --tag="filament-media-manager-config"
-```
+## 🙌 Credits
 
-you can publish views file by use this command
+- Original by [TomatoPHP](https://github.com/tomatophp)  
+- File management by [Spatie Media Library](https://spatie.be/docs/laravel-medialibrary/)  
+- UI powered by [FilamentPHP](https://filamentphp.com)
 
-```bash
-php artisan vendor:publish --tag="filament-media-manager-views"
-```
+---
 
-you can publish languages file by use this command
+## 📄 License
 
-```bash
-php artisan vendor:publish --tag="filament-media-manager-lang"
-```
-
-you can publish migrations file by use this command
-
-```bash
-php artisan vendor:publish --tag="filament-media-manager-migrations"
-```
-
-## Other Filament Packages
-
-Checkout our [Awesome TomatoPHP](https://github.com/tomatophp/awesome)
+[MIT](LICENSE)

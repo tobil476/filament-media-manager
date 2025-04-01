@@ -1,6 +1,8 @@
 <?php
 
 return [
+    "disk" => env('MEDIA_MANAGER_DISK', 'public'),
+
     "model" => [
         "folder" => \TomatoPHP\FilamentMediaManager\Models\Folder::class,
         "media" => \TomatoPHP\FilamentMediaManager\Models\Media::class,
